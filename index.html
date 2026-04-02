@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokajian Lab | Lebanese American University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --color-bg:           #ffffff;
+      --color-text:         #111111;
+      --color-text-muted:   #555555;
+      --color-link:         #1a0dab;
+      --color-link-visited: #609;
+      --color-link-hover:   #d62b00;
+      --color-border:       #cccccc;
+      --color-rule:         #999999;
+      --color-nav-active:   #000000;
+      --color-sidebar-head: #333333;
+      --color-accent-red:   #c0392b;
+
+      --font-sans:   'Source Sans 3', Arial, sans-serif;
+      --font-serif:  'Source Sans 3', Arial, sans-serif;
+
+      --size-base:   14px;
+      --lh-body:     1.65;
+      --lh-tight:    1.3;
+
+      --space-xs:    4px;
+      --space-sm:    8px;
+      --space-md:    16px;
+      --space-lg:    24px;
+      --space-xl:    40px;
+
+      --nav-width:     148px;
+      --sidebar-width: 200px;
+      --max-width:     980px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: var(--size-base); scroll-behavior: smooth; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: var(--lh-body);
+    }
+
+    a { color: var(--color-link); text-decoration: underline; }
+    a:visited { color: var(--color-link-visited); }
+    a:hover { color: var(--color-link-hover); }
+    a:focus-visible {
+      outline: 2px solid var(--color-accent-red);
+      outline-offset: 2px;
+    }
+
+    /* ===== PAGE WRAPPER ===== */
+    .page-wrapper {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-md);
+    }
+
+    /* ===== SITE HEADER ===== */
+    .site-header {
+      padding-bottom: var(--space-sm);
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .site-header h1 {
+      font-family: var(--font-sans);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      line-height: 1;
+    }
+    .site-header .tagline {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    /* ===== THREE-COLUMN LAYOUT ===== */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--nav-width) 1fr var(--sidebar-width);
+      grid-template-areas: "nav main sidebar";
+      gap: 0;
+      align-items: start;
+    }
+
+    /* ===== LEFT NAV ===== */
+    .site-nav {
+      grid-area: nav;
+      padding-top: var(--space-lg);
+      padding-right: var(--space-md);
+      position: sticky;
+      top: var(--space-lg);
+    }
+    .site-nav ul {
+      list-style: none;
+    }
+    .site-nav ul li {
+      margin-bottom: 3px;
+    }
+    .site-nav a {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--color-link);
+      text-decoration: none;
+      display: block;
+      padding: 1px 0;
+    }
+    .site-nav a:hover { color: var(--color-link-hover); text-decoration: underline; }
+    .site-nav a.active {
+      font-weight: 700;
+      color: var(--color-nav-active);
+      text-decoration: none;
+      padding-left: 6px;
+      border-left: 2px solid var(--color-text);
+    }
+    .site-nav .nav-divider {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: var(--space-md) 0;
+    }
+    .site-nav .nav-section-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-xs);
+      display: block;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      grid-area: main;
+      padding-top: var(--space-lg);
+      padding-left: var(--space-lg);
+      padding-right: var(--space-lg);
+      border-left: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      min-height: 80vh;
+    }
+
+    .page-title {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .main-content p {
+      margin-bottom: var(--space-md);
+      font-size: 0.93rem;
+    }
+
+    .main-content h2 {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-md);
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .main-content h3 {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-sm);
+      color: var(--color-text);
+    }
+
+    /* Image gallery / figure pair */
+    .figure-row {
+      display: flex;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .figure-row figure {
+      flex: 1;
+      margin: 0;
+    }
+    .figure-row figure .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #d8d8d8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: #888;
+      border: 1px solid var(--color-border);
+    }
+    .figure-row figcaption {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: var(--space-xs);
+      line-height: 1.4;
+    }
+
+    /* Word-cloud style placeholder */
+    .word-cloud-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-color: #f0f0f0;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: #888;
+    }
+
+    /* News items */
+    .news-list {
+      list-style: none;
+    }
+    .news-list li {
+      font-size: 0.88rem;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px dotted var(--color-border);
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .news-date {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Members grid */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+    }
+    .member-card {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+    .member-avatar {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      background-color: #d8d8d8;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: #888;
+      font-family: var(--font-sans);
+    }
+    .member-info { flex: 1; }
+    .member-name {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .member-role {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-xs);
+    }
+    .member-desc {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+
+    /* Publications list */
+    .pub-category {
+      margin-bottom: var(--space-xl);
+    }
+    .pub-category h2 {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-md);
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .pub-list {
+      list-style: none;
+    }
+    .pub-list li {
+      font-size: 0.88rem;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px dotted var(--color-border);
+      line-height: 1.5;
+    }
+    .pub-list li:last-child { border-bottom: none; }
+    .pub-authors {
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+    }
+    .pub-journal {
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+    .pub-year {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+    .pub-links {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+    .pub-links a {
+      margin-right: var(--space-sm);
+    }
+
+    /* INSERT marker style */
+    .insert {
+      background-color: #fff8cc;
+      border: 1px dashed #cca800;
+      padding: 1px 4px;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-style: normal;
+      color: #7a5f00;
+      border-radius: 2px;
+    }
+
+    /* ===== RIGHT SIDEBAR ===== */
+    .sidebar {
+      grid-area: sidebar;
+      padding-top: var(--space-lg);
+      padding-left: var(--space-md);
+    }
+    .sidebar-section {
+      margin-bottom: var(--space-xl);
+    }
+    .sidebar-heading {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-sidebar-head);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 3px;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+    .sidebar-section ul {
+      list-style: none;
+    }
+    .sidebar-section ul li {
+      margin-bottom: var(--space-xs);
+      padding-bottom: var(--space-xs);
+    }
+    .sidebar-section ul li a {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+    .sidebar-section .sub-heading {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-xs);
+    }
+
+    /* ===== SECTION PAGES (hidden by default, shown via class) ===== */
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-width: 130px;
+        --sidebar-width: 175px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "nav"
+          "main"
+          "sidebar";
+      }
+      .site-nav {
+        position: static;
+        padding-right: 0;
+        padding-top: var(--space-md);
+      }
+      .site-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm) var(--space-lg);
+      }
+      .main-content {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid var(--color-border);
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .sidebar {
+        padding-left: 0;
+        border-top: 1px solid var(--color-border);
+        padding-top: var(--space-lg);
+      }
+      .members-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .figure-row { flex-direction: column; }
+      .site-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ===== SITE HEADER ===== -->
+  <header class="site-header">
+    <h1>Tokajian Lab</h1>
+    <p class="tagline">Microbial Genomics &amp; AMR | Lebanese American University, Department of Biological Sciences</p>
+  </header>
+
+  <!-- ===== THREE-COLUMN LAYOUT ===== -->
+  <div class="layout">
+
+    <!-- LEFT NAV -->
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#about" class="nav-link active" data-target="about">About</a></li>
+        <li><a href="#members" class="nav-link" data-target="members">Group Members</a></li>
+        <li><a href="#publications" class="nav-link" data-target="publications">Publications</a></li>
+        <li><a href="#software" class="nav-link" data-target="software">Software</a></li>
+        <li><a href="#blog" class="nav-link" data-target="blog">Blog</a></li>
+        <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+      </ul>
+      <hr class="nav-divider">
+      <span class="nav-section-label">Links</span>
+      <ul>
+        <li><a href="https://www.lau.edu.lb" target="_blank" rel="noopener">LAU</a></li>
+        <li><a href="https://pubmed.ncbi.nlm.nih.gov/?term=tokajian+s" target="_blank" rel="noopener">PubMed</a></li>
+        <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+      </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="main-content">
+
+      <!-- ABOUT PAGE -->
+      <section class="content-section active" id="about">
+        <p class="page-title">About</p>
+
+        <p>
+          The Tokajian Laboratory at the <a href="https://www.lau.edu.lb">Lebanese American University</a>,
+          Department of Biological Sciences, investigates the genomic epidemiology of bacterial pathogens
+          responsible for healthcare-associated and community-acquired infections in Lebanon and the broader
+          Middle East. Our research combines whole-genome sequencing, comparative genomics, and molecular
+          epidemiology to understand how antimicrobial resistance (AMR) emerges, spreads, and persists in
+          clinical and environmental reservoirs.
+        </p>
+
+        <div class="figure-row">
+          <figure>
+            <div class="word-cloud-placeholder" role="img" aria-label="Word cloud of key research themes">
+              <span>[INSERT: Word cloud / research theme graphic]</span>
+            </div>
+            <figcaption>Key themes in the lab's research program.</figcaption>
+          </figure>
+          <figure>
+            <img src="IMG_1148.jpg" alt="Tokajian Lab group photo" style="width:100%;height:auto;border:1px solid var(--color-border);">
+            <figcaption>
+              <span class="insert">[INSERT: Caption for lab photo, e.g., "Lab members at fieldwork site, 2024"]</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p>
+          We work primarily with <em>Klebsiella pneumoniae</em>, <em>Acinetobacter baumannii</em>,
+          <em>Pseudomonas aeruginosa</em>, <em>Mycobacterium tuberculosis</em>, and the
+          <em>Enterobacter cloacae</em> complex. A central focus is the dissemination of carbapenem-resistant
+          and extensively drug-resistant (XDR) lineages in Lebanese hospitals, including the characterization
+          of plasmid-borne resistance determinants and mobile genetic elements that drive horizontal gene
+          transfer across species and settings.
+        </p>
+
+        <p>
+          A major ongoing project traces the phylogeography of ST383 <em>K. pneumoniae</em>, a high-risk
+          clone associated with bla<sub>KPC</sub> and bla<sub>NDM</sub> carriage, across Lebanese hospital
+          networks. We apply Bayesian phylogenetic methods and recombination analysis to reconstruct transmission
+          chains and estimate evolutionary rates in real time.
+        </p>
+
+        <p>
+          Metagenomic surveillance of clinical and wastewater samples allows us to profile resistome dynamics
+          at the population level, capturing resistance gene diversity beyond what culture-based methods can
+          detect. These datasets feed into One Health frameworks that connect clinical AMR patterns to
+          environmental and agricultural reservoirs.
+        </p>
+
+        <h2>News</h2>
+        <ul class="news-list">
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Month Year]</span></span>
+            <span class="insert">[INSERT: News item, e.g., "New paper published in Journal of Antimicrobial Chemotherapy on carbapenem-resistant K. pneumoniae ST383 in Lebanese hospitals."]</span>
+          </li>
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Month Year]</span></span>
+            <span class="insert">[INSERT: News item, e.g., "Welcome to [Name], new PhD student joining the lab to work on metagenomic AMR surveillance."]</span>
+          </li>
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Month Year]</span></span>
+            <span class="insert">[INSERT: News item, e.g., "Lab awarded [Funder] grant for [Project title]."]</span>
+          </li>
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Month Year]</span></span>
+            <span class="insert">[INSERT: News item, e.g., "Paper on XDR A. baumannii resistome accepted in Frontiers in Microbiology."]</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- GROUP MEMBERS PAGE -->
+      <section class="content-section" id="members">
+        <p class="page-title">Group Members</p>
+
+        <h2>Principal Investigator</h2>
+        <div class="members-grid" style="grid-template-columns: 1fr; margin-bottom: 32px;">
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo of Dr. Sima Tokajian">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name">Dr. Sima Tokajian</p>
+              <p class="member-role">Professor, Department of Biological Sciences, LAU</p>
+              <p class="member-desc">
+                Dr. Tokajian leads the lab's research programme on bacterial pathogen genomics, AMR,
+                and molecular epidemiology in Lebanon.
+                <span class="insert">[INSERT: 2-3 sentence bio: education, career highlights, current research focus]</span>
+              </p>
+              <p class="member-desc" style="margin-top:4px;">
+                <a href="mailto:[INSERT: email@lau.edu.lb]">Email</a> &middot;
+                <a href="#" data-insert="[INSERT: Google Scholar URL]" target="_blank" rel="noopener">Google Scholar</a> &middot;
+                <a href="#" data-insert="[INSERT: ORCID URL]" target="_blank" rel="noopener">ORCID</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Postdoctoral Researchers</h2>
+        <div class="members-grid">
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">Postdoctoral Research Fellow</p>
+              <p class="member-desc"><span class="insert">[INSERT: Brief project description, e.g., "Working on carbapenem-resistant Enterobacteriaceae genomics."]</span></p>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">Postdoctoral Research Fellow</p>
+              <p class="member-desc"><span class="insert">[INSERT: Brief project description]</span></p>
+            </div>
+          </div>
+        </div>
+
+        <h2>PhD Students</h2>
+        <div class="members-grid">
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">PhD Candidate</p>
+              <p class="member-desc"><span class="insert">[INSERT: Thesis project description]</span></p>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">PhD Candidate</p>
+              <p class="member-desc"><span class="insert">[INSERT: Thesis project description]</span></p>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">PhD Candidate</p>
+              <p class="member-desc"><span class="insert">[INSERT: Thesis project description]</span></p>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">PhD Candidate</p>
+              <p class="member-desc"><span class="insert">[INSERT: Thesis project description]</span></p>
+            </div>
+          </div>
+        </div>
+
+        <h2>MSc Students</h2>
+        <div class="members-grid">
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">MSc Student</p>
+              <p class="member-desc"><span class="insert">[INSERT: Project description]</span></p>
+            </div>
+          </div>
+          <div class="member-card">
+            <div class="member-avatar" role="img" aria-label="Photo placeholder">[Photo]</div>
+            <div class="member-info">
+              <p class="member-name"><span class="insert">[INSERT: Full name]</span></p>
+              <p class="member-role">MSc Student</p>
+              <p class="member-desc"><span class="insert">[INSERT: Project description]</span></p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Alumni</h2>
+        <ul class="pub-list">
+          <li>
+            <span class="insert">[INSERT: Name]</span>
+            <span class="pub-authors">(<span class="insert">[INSERT: Degree, Year]</span>) now at: <span class="insert">[INSERT: Current position]</span></span>
+          </li>
+          <li>
+            <span class="insert">[INSERT: Name]</span>
+            <span class="pub-authors">(<span class="insert">[INSERT: Degree, Year]</span>) now at: <span class="insert">[INSERT: Current position]</span></span>
+          </li>
+          <li>
+            <span class="insert">[INSERT: Name]</span>
+            <span class="pub-authors">(<span class="insert">[INSERT: Degree, Year]</span>) now at: <span class="insert">[INSERT: Current position]</span></span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- PUBLICATIONS PAGE -->
+      <section class="content-section" id="publications">
+        <p class="page-title">Publications</p>
+        <p style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 24px;">
+          Full list available on
+          <a href="https://pubmed.ncbi.nlm.nih.gov/?term=tokajian+s" target="_blank" rel="noopener">PubMed</a>
+          and <a href="#" data-insert="[INSERT: Google Scholar profile URL]" target="_blank" rel="noopener">Google Scholar</a>.
+          <span class="insert">[INSERT: Confirm PubMed search query returns complete record]</span>
+        </p>
+
+        <div class="pub-category">
+          <h2><em>Klebsiella pneumoniae</em> &amp; Enterobacteriaceae</h2>
+          <ul class="pub-list">
+            <li>
+              <span class="insert">[INSERT: Author list including Tokajian S]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+                <a href="#" data-insert="[INSERT: PubMed URL]" target="_blank" rel="noopener">PubMed</a>
+              </span>
+            </li>
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+                <a href="#" data-insert="[INSERT: PubMed URL]" target="_blank" rel="noopener">PubMed</a>
+              </span>
+            </li>
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pub-category">
+          <h2><em>Acinetobacter baumannii</em> &amp; <em>Pseudomonas aeruginosa</em></h2>
+          <ul class="pub-list">
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+                <a href="#" data-insert="[INSERT: PubMed URL]" target="_blank" rel="noopener">PubMed</a>
+              </span>
+            </li>
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pub-category">
+          <h2>AMR &amp; Resistome</h2>
+          <ul class="pub-list">
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+                <a href="#" data-insert="[INSERT: PubMed URL]" target="_blank" rel="noopener">PubMed</a>
+              </span>
+            </li>
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pub-category">
+          <h2>Metagenomics &amp; Molecular Epidemiology</h2>
+          <ul class="pub-list">
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+              </span>
+            </li>
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+                <a href="#" data-insert="[INSERT: PubMed URL]" target="_blank" rel="noopener">PubMed</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="pub-category">
+          <h2><em>Mycobacterium tuberculosis</em></h2>
+          <ul class="pub-list">
+            <li>
+              <span class="insert">[INSERT: Author list]</span> (<span class="insert">[INSERT: Year]</span>).
+              <span class="insert">[INSERT: Title]</span>.
+              <span class="pub-journal"><span class="insert">[INSERT: Journal]</span></span>,
+              <span class="insert">[INSERT: volume(issue):pages]</span>.
+              <span class="pub-links">
+                <a href="#" data-insert="[INSERT: DOI URL]" target="_blank" rel="noopener">DOI</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SOFTWARE PAGE -->
+      <section class="content-section" id="software">
+        <p class="page-title">Software</p>
+
+        <p>
+          Tools and scripts developed in the lab are deposited on GitHub.
+          <span class="insert">[INSERT: GitHub organisation or user URL, e.g., github.com/tokajianlab]</span>
+        </p>
+
+        <h2>Tools</h2>
+        <ul class="pub-list">
+          <li>
+            <strong><span class="insert">[INSERT: Tool name]</span></strong>
+            <span class="pub-authors">: <span class="insert">[INSERT: One-sentence description, e.g., "Pipeline for resistome profiling from metagenomic reads."]</span></span>
+            <span class="pub-links">
+              <a href="#" data-insert="[INSERT: GitHub URL]" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </li>
+          <li>
+            <strong><span class="insert">[INSERT: Tool name]</span></strong>
+            <span class="pub-authors">: <span class="insert">[INSERT: One-sentence description]</span></span>
+            <span class="pub-links">
+              <a href="#" data-insert="[INSERT: GitHub URL]" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </li>
+          <li>
+            <strong><span class="insert">[INSERT: Tool name]</span></strong>
+            <span class="pub-authors">: <span class="insert">[INSERT: One-sentence description]</span></span>
+            <span class="pub-links">
+              <a href="#" data-insert="[INSERT: GitHub URL]" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          </li>
+        </ul>
+
+        <h2>Datasets</h2>
+        <ul class="pub-list">
+          <li>
+            <span class="insert">[INSERT: Dataset name and description, e.g., "Whole-genome sequences of 120 carbapenem-resistant K. pneumoniae isolates from Lebanese hospitals, 2018-2023. NCBI BioProject PRJNAXXXXXX."]</span>
+            <span class="pub-links">
+              <a href="#" data-insert="[INSERT: NCBI or Zenodo URL]" target="_blank" rel="noopener">NCBI</a>
+            </span>
+          </li>
+          <li>
+            <span class="insert">[INSERT: Dataset name and description]</span>
+            <span class="pub-links">
+              <a href="#" data-insert="[INSERT: URL]" target="_blank" rel="noopener">Repository</a>
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- BLOG PAGE -->
+      <section class="content-section" id="blog">
+        <p class="page-title">Blog</p>
+        <p>
+          <span class="insert">[INSERT: Short description of what the blog covers, e.g., "Commentary on AMR surveillance, methods notes, and lab updates."]</span>
+        </p>
+
+        <h2>Posts</h2>
+        <ul class="news-list">
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Date]</span></span>
+            <strong><span class="insert">[INSERT: Post title]</span></strong>
+            <br><span class="insert">[INSERT: 2-3 sentence post summary or excerpt]</span>
+          </li>
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Date]</span></span>
+            <strong><span class="insert">[INSERT: Post title]</span></strong>
+            <br><span class="insert">[INSERT: 2-3 sentence post summary or excerpt]</span>
+          </li>
+          <li>
+            <span class="news-date"><span class="insert">[INSERT: Date]</span></span>
+            <strong><span class="insert">[INSERT: Post title]</span></strong>
+            <br><span class="insert">[INSERT: 2-3 sentence post summary or excerpt]</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- CONTACT PAGE -->
+      <section class="content-section" id="contact">
+        <p class="page-title">Contact</p>
+
+        <p>
+          <strong>Dr. Sima Tokajian</strong><br>
+          Department of Biological Sciences<br>
+          Lebanese American University<br>
+          <span class="insert">[INSERT: Building / Room number, Campus name]</span><br>
+          Beirut, Lebanon
+        </p>
+
+        <p>
+          Email: <a href="mailto:[INSERT: sima.tokajian@lau.edu.lb]"><span class="insert">[INSERT: sima.tokajian@lau.edu.lb]</span></a><br>
+          Phone: <span class="insert">[INSERT: +961 X XXX XXXX]</span>
+        </p>
+
+        <p>
+          <span class="insert">[INSERT: Any specific note for prospective students, collaborators, or media enquiries]</span>
+        </p>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar" aria-label="Recent publications by topic">
+
+      <section class="sidebar-section">
+        <span class="sidebar-heading">Papers</span>
+
+        <span class="sub-heading"><em>K. pneumoniae</em></span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year, e.g., "Al-Farsi et al. 2024: ST383 clonal expansion in Lebanese ICUs"]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+
+        <span class="sub-heading"><em>A. baumannii</em></span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+
+        <span class="sub-heading"><em>P. aeruginosa</em></span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+
+        <span class="sub-heading">AMR &amp; Resistome</span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+
+        <span class="sub-heading">Metagenomics</span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+
+        <span class="sub-heading"><em>M. tuberculosis</em></span>
+        <ul>
+          <li><a href="#" data-insert="[INSERT: DOI URL]"><span class="insert">[INSERT: Short title or first author + year]</span></a></li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <span class="sidebar-heading">Funding</span>
+        <ul>
+          <li><span class="insert">[INSERT: Funder name, e.g., "Lebanese National Council for Scientific Research (CNRS-L)"]</span></li>
+          <li><span class="insert">[INSERT: Funder name, e.g., "LAU University Research Board"]</span></li>
+          <li><span class="insert">[INSERT: Funder name]</span></li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <span class="sidebar-heading">Affiliations</span>
+        <ul>
+          <li><a href="https://www.lau.edu.lb" target="_blank" rel="noopener">Lebanese American University</a></li>
+          <li><span class="insert">[INSERT: Any affiliated institute or consortium, e.g., "ESCMID Study Group for Genomic and Molecular Diagnostics (ESGMD)"]</span></li>
+          <li><span class="insert">[INSERT: Affiliation]</span></li>
+        </ul>
+      </section>
+
+    </aside>
+
+  </div><!-- /.layout -->
+
+</div><!-- /.page-wrapper -->
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('.nav-link');
+    var sections = document.querySelectorAll('.content-section');
+    var pageTitle = document.querySelector('.page-title');
+
+    function showSection(target) {
+      sections.forEach(function (s) { s.classList.remove('active'); });
+      links.forEach(function (l) { l.classList.remove('active'); });
+      var section = document.getElementById(target);
+      if (section) {
+        section.classList.add('active');
+        var pt = section.querySelector('.page-title');
+        if (pt) pt.style.display = '';
+      }
+      links.forEach(function (l) {
+        if (l.dataset.target === target) l.classList.add('active');
+      });
+      window.scrollTo(0, 0);
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = this.dataset.target;
+        if (target) {
+          showSection(target);
+          history.pushState(null, '', '#' + target);
+        }
+      });
+    });
+
+    // Handle direct hash navigation on load
+    var hash = window.location.hash.replace('#', '');
+    if (hash) { showSection(hash); }
+  }());
+</script>
+
+</body>
+</html>
